@@ -19,24 +19,24 @@ $(function () {
   let hour3 = $('#3');
   let hour4 = $('#4');
   let hour5 = $("#5")
-//   let time = moment();
-  
+  //   let time = moment();
+
   function setPlanner() {
-      $("#currentDay").text(dayjs().format("dddd, MMMM, D YYYY"));
-      $("time-block").each(function() {
-          let id = $(this).attr("id");
-          let schedule = localStorage.getItem(id);
-          if (schedule !== null) {
-              $(this).children('.schedule').val(schedule);
-          }
-      
-  });
-  
+    $("#currentDay").text(dayjs().format("dddd, MMMM, D YYYY"));
+    $("time-block").each(function () {
+      let id = $(this).attr("id");
+      let schedule = localStorage.getItem(id);
+      if (schedule !== null) {
+        $(this).children('.schedule').val(schedule);
+      }
+
+    });
+
   }
 
 
-//import dayjs from 'dayjs' // ES 2015
-dayjs().format()
+  //import dayjs from 'dayjs' // ES 2015
+  dayjs().format()
 
 
 
@@ -51,23 +51,23 @@ dayjs().format()
 
   setPlanner();
   var saveButton = $(".saveBtn");
-  console.log (saveButton);
-  
-  saveButton.on('click', function(){
-        let storage = $(".localstorage")
-      let time =$(this).parent().attr('id');
-      let schedule = $(this).siblings('.description').val();
-      localStorage.setItem(time, schedule);
-        storage.text("Appointment Added to localStorage ✔")
-    });
+  console.log(saveButton);
+
+  saveButton.on('click', function () {
+    let storage = $(".localstorage")
+    let time = $(this).parent().attr('id');
+    let schedule = $(this).siblings('.description').val();
+    localStorage.setItem(time, schedule);
+    storage.text("Appointment Added to localStorage ✔")
+  });
 
   var schedule = $(".description");
-  for (i=0; i<schedule.length;i++){
-    console.log (schedule);
+  for (i = 0; i < schedule.length; i++) {
+    console.log(schedule);
 
-    schedule[i].value = localStorage.getItem("hour-"+i)
-    console.log("hour-"+i)
-} 
+    schedule[i].value = localStorage.getItem("hour-" + (i+9))
+    console.log("hour-" + i)
+  }
 
 
 
@@ -83,27 +83,27 @@ dayjs().format()
 
 
 function pastPresentFuture() {
-//   hour = time.hours();
-  hour = dayjs().format("H")
-    console.log(hour)
-    var timeblock = $('.time-block')
-for (i=0;i<timeblock.length;i++) {
+  //   hour = time.hours();
+  hour = dayjs().hour ()
+  console.log(hour)
+  var timeblock = $('.time-block')
+  for (i = 0; i < timeblock.length; i++) {
 
     console.log($(timeblock[i]).attr("id"))
-      let thisHour = parseInt($(timeblock[i]).attr("id").replace("hour-", ""));
-      console.log({thisHour,hour})
+    let thisHour = parseInt($(timeblock[i]).attr("id").replace("hour-", ""));
+    console.log({ thisHour, hour })
 
-      if (thisHour > hour) {
-          $(timeblock[i]).addClass('future');
-      }
-      else if (thisHour === hour) {
-          $(timeblock[i]).addClass('present');
-      
-      }
-      else {
-          $(timeblock[i]).addClass('past');
-      
-      }
+    if (thisHour > hour) {
+      $(timeblock[i]).addClass('future');
+    }
+    else if (thisHour === hour) {
+      $(timeblock[i]).addClass('present');
+
+    }
+    else {
+      $(timeblock[i]).addClass('past');
+
+    }
   }
 }
 pastPresentFuture();
